@@ -19,11 +19,12 @@ def generate_commit_log(repo_dir, author, output_file_name):
         repo_dir,
         "log",
         "--all",
-        "--no-merges",  # Exclude merge commits
-        f"--author={author}",
+        "--no-merges",
         "--reverse",
         "--shortstat",
     ]
+    if author:
+        git_command.append(f"--author={author}")
     result = subprocess.run(git_command, capture_output=True, text=True)
     if result.returncode != 0:
         print("Error running Git command:", result.stderr)
@@ -47,9 +48,11 @@ def parse_commit_log(file_path):
             continue
 
         header, message, change_stats = parts
-        commit_id, author, author_email, date_time_str = re.match(
+        match = re.match(
             r"^([\da-f]+)\nAuthor: (.+?) <(.+?)>\nDate: (.+?)$", header, re.DOTALL
-        ).groups()
+        )
+        if match:
+            commit_id, author, author_email, date_time_str = match.groups()
 
         # Process change stats more flexibly
         files_changed = insertions = deletions = "0"
@@ -97,13 +100,17 @@ def parse_commit_log(file_path):
 
 
 def main():
-    repo_dir = input("Enter the path to your Git repository: ").strip()
+    repo_dir = input("Enter the path to your local Git repository: ").strip()
     if not isdir(repo_dir):
         print("Invalid directory. Please enter a valid Git repository directory.")
         return
 
     repo_name = get_repo_name(repo_dir)
-    author_username = "5a9awneh"
+
+    author_choice = input("Filter by specific author? (y/n): ").strip().lower()
+    author_username = ""
+    if author_choice == "y":
+        author_username = input("Enter author's GitHub username: ").strip()
 
     git_output_file = f"{repo_name}_commit_history.txt"
     csv_output_file = f"{repo_name}_commit_history.csv"
