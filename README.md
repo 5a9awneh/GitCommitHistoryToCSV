@@ -9,6 +9,7 @@ GitCommitHistoryToCSV is a Python script that automates the extraction of Git co
 - Excludes merge commits for clearer data analysis.
 - Generates a CSV file with detailed commit information.
 - Automatically names files based on the repository name.
+- Comprehensive logging of operations and errors for troubleshooting - see `debug.log` for detailed information.
 
 ## Prerequisites
 - Python 3
@@ -27,6 +28,8 @@ GitCommitHistoryToCSV is a Python script that automates the extraction of Git co
 
 ## Output Format
 The generated CSV file contains the following columns:
+- Repository URL
+- Branch
 - Commit ID
 - Author
 - Date
