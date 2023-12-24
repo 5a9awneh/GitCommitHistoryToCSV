@@ -1,3 +1,4 @@
+import argparse
 import subprocess
 import pandas as pd
 import re
@@ -126,7 +127,19 @@ def parse_commit_log(file_path, repo_url, repo_branch):
 
 
 def main():
-    repo_dir = input("Enter the path to your local Git repository: ").strip()
+    parser = argparse.ArgumentParser(
+        description="Extract the Git commit logs to a CSV file."
+    )
+    parser.add_argument("repo_dir", type=str, help="Path to the local Git repository.")
+    parser.add_argument(
+        "--author",
+        type=str,
+        default="",
+        help="Filter commits by a specific author's GitHub username.",
+    )
+    args = parser.parse_args()
+
+    repo_dir = args.repo_dir
     if not isdir(repo_dir):
         logging.error(
             "Invalid directory. Please enter a valid Git repository directory."
@@ -136,16 +149,8 @@ def main():
     try:
         repo_name = get_repo_name(repo_dir)
         repo_url, repo_branch = get_repo_details(repo_dir)
-    except Exception as e:
-        logging.error("Failed to obtain repository details: %s", str(e))
-        return
+        author_username = args.author
 
-    author_choice = input("Filter by specific author? (y/n): ").strip().lower()
-    author_username = ""
-    if author_choice == "y":
-        author_username = input("Enter author's GitHub username: ").strip()
-
-    try:
         git_output_file = f"{repo_name}_commit_history.txt"
         csv_output_file = f"{repo_name}_commit_history.csv"
 
@@ -156,9 +161,8 @@ def main():
             df = parse_commit_log(commit_log_file, repo_url, repo_branch)
             df.to_csv(csv_output_file, index=False, quoting=csv.QUOTE_NONNUMERIC)
             logging.info(f"CSV file created: {csv_output_file}")
-
     except Exception as e:
-        logging.error("An error occurred while generating the CSV file: %s", str(e))
+        logging.error("An error occurred: %s", str(e))
     finally:
         if commit_log_file and os.path.exists(commit_log_file):
             os.remove(commit_log_file)
