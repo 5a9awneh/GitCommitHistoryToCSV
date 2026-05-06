@@ -1,5 +1,9 @@
 # GitCommitHistoryToCSV
 
+<!-- BADGES:START -->
+[![License](https://img.shields.io/github/license/5a9awneh/GitCommitHistoryToCSV)](LICENSE) [![Python](https://img.shields.io/badge/Python-3670A0?style=flat&logo=python&logoColor=ffdd54)](https://www.python.org/) [![Last Commit](https://img.shields.io/github/last-commit/5a9awneh/GitCommitHistoryToCSV)](https://github.com/5a9awneh/GitCommitHistoryToCSV/commits/main) [![Output](https://img.shields.io/badge/output-CSV-blue?style=flat)](https://github.com/5a9awneh/GitCommitHistoryToCSV) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat)](http://makeapullrequest.com) [![Runs Locally](https://img.shields.io/badge/runs_locally-privacy--first-green?style=flat)](https://github.com/5a9awneh/GitCommitHistoryToCSV) [![Human in the Loop](https://img.shields.io/badge/human--in--the--loop-%E2%9C%93-brightgreen?style=flat)](https://github.com/5a9awneh/GitCommitHistoryToCSV)
+<!-- BADGES:END -->
+
 ## Description
 GitCommitHistoryToCSV is a Python script that automates the extraction of Git commit logs into a CSV file. It's designed to parse the commit history of a given Git repository, with an option to filter by a specific author, and convert it into a structured CSV format for analysis and reporting.
 
