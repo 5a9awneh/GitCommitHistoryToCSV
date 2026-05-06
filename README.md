@@ -58,6 +58,27 @@ The `--author` flag is optional and allows you to filter commits by a specific a
 
 The script will generate a CSV file in the script's directory, named `<repository_name>_commit_history.csv`.
 
+**Sample run:**
+
+```
+$ python main.py "/home/user/MyProject" --author "5a9awneh"
+
+Processing repository: MyProject
+Filtering commits by author: 5a9awneh
+Excluding merge commits...
+Writing CSV: MyProject_commit_history.csv
+Done. 47 commits exported.
+```
+
+**Output preview (`MyProject_commit_history.csv`):**
+
+```
+Repository URL,Branch,Commit ID,Author,Date,Time,Message,Files Changed,Insertions (+),Deletions (-)
+https://github.com/5a9awneh/MyProject,main,a1b2c3d,5a9awneh,2026-04-15,09:32:11,feat: add export button,3,42,7
+https://github.com/5a9awneh/MyProject,main,e4f5a6b,5a9awneh,2026-04-12,14:18:55,fix: handle empty repo edge case,1,5,2
+https://github.com/5a9awneh/MyProject,main,7c8d9e0,5a9awneh,2026-04-10,11:05:30,docs: update README,1,18,4
+```
+
 ## 📊 Output Format
 The generated CSV file contains the following columns:
 - Repository URL
