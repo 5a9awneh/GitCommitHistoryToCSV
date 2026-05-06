@@ -6,8 +6,12 @@
 
 ## 📄 Description
 
+GitCommitHistoryToCSV is a Python script that automates the extraction of Git commit logs into a CSV file. It's designed to parse the commit history of a given Git repository, with an option to filter by a specific author, and convert it into a structured CSV format for analysis and reporting.
+
+## 🗺️ How It Works
+
 ```mermaid
-flowchart TD
+flowchart LR
     Start([python main.py]) --> Args[Parse arguments\nrepo path + optional --author]
     Args --> Val{Valid Git\nrepository?}
     Val -->|❌ Not a repo| Err([Exit with error])
@@ -26,8 +30,6 @@ flowchart TD
     style Err fill:#8b1a1a,color:#fff
     style Done fill:#2d6a2d,color:#fff
 ```
-
-GitCommitHistoryToCSV is a Python script that automates the extraction of Git commit logs into a CSV file. It's designed to parse the commit history of a given Git repository, with an option to filter by a specific author, and convert it into a structured CSV format for analysis and reporting.
 
 ## ✨ Features
 - Extracts commit logs from any Git repository.
